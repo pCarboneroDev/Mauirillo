@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cliente.Views.FinalView"
+             xmlns:vm="clr-namespace:Cliente.ViewModels"
+             Title="Clasificación Final">
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#87CEEB" Offset="0.0" />
+            <GradientStop Color="#ADD8E6" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.BindingContext>
+        <vm:FinalVM/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Label Text="Clasificación Final" TextColor="White" HorizontalOptions="Center" FontSize="30" FontFamily="Comic Sans MS"/>
+
+        <ListView ItemsSource="{Binding ListadoJugadores}" SeparatorVisibility="None" BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!--<Frame CornerRadius="15" Padding="10" Margin="5" BackgroundColor="#E0F2FE">-->
+                            <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                                <Label Text="{Binding Nombre}" FontSize="20" TextColor="#333" VerticalTextAlignment="Center" FontFamily="Comic Sans MS"/>
+                                <Label Text="{Binding Puntuacion}" FontSize="20" TextColor="#FF69B4" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontFamily="Comic Sans MS"/>
+                            </HorizontalStackLayout>
+                        <!--</Frame>-->
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Salir"
+                Command="{Binding SalirCommand}"
+                BackgroundColor="#FF4081"
+                TextColor="White"
+                Padding="15,10"
+                FontSize="18"
+                HorizontalOptions="Center"
+                MaximumWidthRequest="250"
+                CornerRadius="20"
+                FontFamily="Comic Sans MS"/>
+
+    </VerticalStackLayout>
+</ContentPage>

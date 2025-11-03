@@ -1,0 +1,99 @@
+﻿ENT:
+	// Clase que almacena todos los atributos que debe tener la sala
+	Sala:
+	+ int IdSala {get; set;}
+	+ string Nombre {get; set;}
+	+ List<Jugador> Jugadores {get; set;}
+
+	// Clase que almacena todos los atributos que debe tener el jugador
+	Jugador:
+	+ int IdJugador{get;set;}
+	+ String Nombre{get;set;}
+	+ bool Tipo{get;set;}
+	+ int Puntuacion{get;set;}
+		
+
+DAL:
+	// Clase que gestiona todas las funciones de las salas del juego
+	Manejadora:
+		// Lista de palabras
+		- static List<String> listadoPalabras
+
+		// Lista de salas
+		- static List<Sala> listadoSalas
+		// Función que devuelve el listado de las salas que hay en el juego
+		// Pre: Siempre devuelve 8 salas
+		// Post: Nunca puede no haber salas
+		// Devuelve una lista de salas
+		+ static List<Sala> getSalas
+		// Funcion que recoge la sala que le manda el servidor
+		//Pre: 
+		//Post:
+		+ static void CrearSala
+		// Método que se encarga de actualizar los jugadores que van 
+		// metiéndose en una sala.
+		// Pre: No puede haber más jugadores que su límite
+		// Post: Ninguna
+		+ static void actJugadoresEnSala
+
+
+DTO
+	// Clase modelo que almacena todos los atributos que debe tener la ronda
+	Ronda:
+	+ IDictionary<string, Jugador> listaJugadores
+	+ Jugador Pintor{get;set}
+	+ String Palabra {get;set}
+	+ int Tiempo {get;set}
+
+UI:
+	
+	ViewModels
+		//
+		InicioVM:
+		+ List<Salas> ListaSalas {get}
+		+ string NombreJugador {get;set}
+		+ Sala SalaSeleccionada{get;set}
+
+		- bool nombreValido()
+
+		//
+		PartidaVM:
+		+ List<Ronda> listaRondas{get}
+		+ (Pizarra)
+		+ string Palabra {get}
+		+ string PalabraAdivinar {get;set}
+		+ DelegateCommand EnviarCommand{get;}
+
+
+		//
+		FinalVM:
+		+ List<Jugador> ListadoPuntuacion{get;}
+		+ DelegateCommand salirCommand {get}
+
+
+Hub:
+	SignalR:
+		Services:
+			- static List<Sala> ListadoSalas
+		Hub:
+
+			+ mandarSalas() // Devuelve todas las salas que hay en el servidor
+			hub manda a todos las salas 
+			+ actualizarSalas() // Actualiza todas las salas para mostrar si se han unido a ellas
+			+ generarRondas
+
+			hub manda un listado de rondas a la sala
+			+ pinto() // Dibuja en la pizarra de cada cliente no pintor
+			hub manda a los que no pinta la pintura
+
+			+ terminamos()
+
+		Cliente
+			unirse(int, Jugador) // Envia el id de la sala y el jugador al servidor
+			invoca a actualizarSalas
+
+			termine() // Manda una señal al servidor de que ha ganado
+			invoca a pinto()
+			termine() // Manda una señal al servidor de que ha ganado
+			invoca a terminamos
+

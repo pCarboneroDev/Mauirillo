@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Cliente.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Cliente"
+    xmlns:vistas="clr-namespace:Cliente.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
+    Title="">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate vistas:HomeView}"
+        Route="HomeView" />
+
+    <ShellContent
+        Title="Pintor"
+        ContentTemplate="{DataTemplate vistas:PintorView}"
+        Route="PintorView"/>
+
+    <ShellContent
+        Title="Final"
+        ContentTemplate="{DataTemplate vistas:FinalView}"
+        Route="FinalView" />
+
+    <ShellContent
+        Title="Prueba"
+        ContentTemplate="{DataTemplate vistas:EsperaView}"
+        Route="EsperaView"/>
+
+</Shell>

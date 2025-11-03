@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cliente.Views.HomeView"
+             xmlns:vm="clr-namespace:Cliente.ViewModels"
+             Title="Mauirillo"
+             Appearing="ContentPage_Appearing">
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#87CEEB" Offset="0.0" />
+            <GradientStop Color="#ADD8E6" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.BindingContext>
+        <vm:HomeVM/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="350">
+
+            <Image Source="icon.png" MaximumHeightRequest="120" MaximumWidthRequest="120" HorizontalOptions="Center"/>
+
+            <Label Text="¡A dibujar!" FontSize="30" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Comic Sans MS"/>
+
+            <Label Text="Ingresa tu nombre" FontSize="20" TextColor="White" HorizontalOptions="Center" FontFamily="Comic Sans MS"/>
+            <Entry Text="{Binding NombreJugador}" Placeholder="Tu nombre" BackgroundColor="White" TextColor="Black" MaximumWidthRequest="300" FontFamily="Comic Sans MS"/>
+
+            <Button Text="¡A jugar!" Command="{Binding UnirseCommand}" BackgroundColor="#FF69B4" TextColor="White" CornerRadius="20" FontAttributes="Bold" MaximumWidthRequest="300" FontFamily="Comic Sans MS"/>
+
+            <Label Text="Nombre de la sala" FontSize="20" TextColor="White" HorizontalOptions="Center" FontFamily="Comic Sans MS"/>
+            <Entry Text="{Binding NombreSala}" Placeholder="Nombre de sala" BackgroundColor="White" TextColor="Black" MaximumWidthRequest="300" FontFamily="Comic Sans MS"/>
+
+            <Button Text="Crear sala" Command="{Binding CrearSalaCommand}" BackgroundColor="#90EE90" TextColor="White" CornerRadius="20" FontAttributes="Bold" MaximumWidthRequest="300" FontFamily="Comic Sans MS"/>
+
+            <Label Text="Salas disponibles" FontSize="22" TextColor="White" HorizontalOptions="Center" FontFamily="Comic Sans MS"/>
+            <ListView ItemsSource="{Binding ListadoSalas}" SelectedItem="{Binding SalaSeleccionada}" BackgroundColor="Transparent" MaximumWidthRequest="300">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!--<Frame CornerRadius="20" Padding="15" BackgroundColor="#4682B4" Margin="5">-->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Nombre}" FontSize="Medium" TextColor="White" FontFamily="Comic Sans MS"/>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Jugadores.Count}" FontSize="Medium" TextColor="White" FontFamily="Comic Sans MS"/>
+                                        <Label Text="/4" FontSize="Medium" TextColor="White" FontFamily="Comic Sans MS"/>
+                                    </HorizontalStackLayout>
+                                </HorizontalStackLayout>
+                            <!--</Frame>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
